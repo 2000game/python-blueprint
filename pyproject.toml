@@ -2,13 +2,13 @@
 name = "fact"
 version = "1.0.0"
 description = "Example Python project using best practices"
-authors = ["John Hagen <johnthagen@gmail.com>"]
+authors = ["Felix Kotschenreuther <fkotschenreuther@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/johnthagen/python-blueprint"
-documentation = "https://johnthagen.github.io/python-blueprint/"
+repository = "https://github.com/2000game/python-blueprint"
+documentation = "https://2000game.github.io/python-blueprint/"
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
@@ -64,8 +64,8 @@ mkdocstrings = { version = "*", extras = ["python"] }
 mkdocs-gen-files = "*"
 mkdocs-literate-nav = "*"
 
-[tool.poetry.scripts]
-fact = "fact.cli:app"
+#[tool.poetry.scripts]
+#fact = "fact.cli:app"
 
 [build-system]
 requires = ["poetry-core"]
