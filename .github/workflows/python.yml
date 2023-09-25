@@ -3,7 +3,7 @@ name: python
 on: [push, pull_request]
 
 env:
-  POETRY_VERSION: "1.5.1"
+  POETRY_VERSION: "1.6.1"
   PYTHON_VERSION: "3.10"
 
 jobs:
@@ -34,7 +34,7 @@ jobs:
           - { nox-session: fmt_check, poetry-groups: "fmt,lint" }
           - { nox-session: lint, poetry-groups: "lint" }
           # type_check needs main and test dependencies for inline type annotations.
-          - { nox-session: type_check, poetry-groups: "type_check,main,dev" }
+          - { nox-session: type_check, poetry-groups: "type_check,main,test" }
           - { nox-session: docs, poetry-groups: "docs" }
     steps:
       - uses: actions/checkout@v3
@@ -59,7 +59,5 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      - name: Validate Poetry Configuration
-        run: poetry check
-      - name: Validate Lockfile Freshness
-        run: poetry lock --check
+      - name: Validate Poetry Configuration and Lockfile Freshness
+        run: poetry check --lock
