@@ -3,14 +3,12 @@
 [![GitHub Actions][github-actions-badge]](https://github.com/johnthagen/python-blueprint/actions)
 [![Poetry][poetry-badge]](https://python-poetry.org/)
 [![Nox][nox-badge]](https://github.com/wntrblm/nox)
-[![Code style: Black][black-badge]](https://github.com/psf/black)
 [![Ruff][ruff-badge]](https://github.com/astral-sh/ruff)
 [![Type checked with mypy][mypy-badge]](https://mypy-lang.org/)
 
 [github-actions-badge]: https://github.com/johnthagen/python-blueprint/workflows/python/badge.svg
 [poetry-badge]: https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json
 [nox-badge]: https://img.shields.io/badge/%F0%9F%A6%8A-Nox-D85E00.svg
-[black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
 [ruff-badge]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
 [mypy-badge]: https://www.mypy-lang.org/static/mypy_badge.svg
 
@@ -29,8 +27,8 @@ Python 3.8+.
 This package uses [Poetry](https://python-poetry.org/) to manage dependencies and
 isolated [Python virtual environments](https://docs.python.org/3/library/venv.html).
 
-To proceed, 
-[install Poetry globally](https://python-poetry.org/docs/#installing-with-the-official-installer)
+To proceed,
+[install Poetry globally](https://python-poetry.org/docs/#installation)
 onto your system.
 
 ## Dependencies
@@ -41,6 +39,7 @@ all machines that use the project, both during development and in production.
 
 To install all dependencies into an isolated virtual environment:
 
+> [!TIP]
 > Append `--sync` to uninstall dependencies that are no longer in use from the virtual environment.
 
 ```bash
@@ -85,8 +84,9 @@ $ poetry build
 
 This will generate `dist/fact-1.0.0.tar.gz` and `dist/fact-1.0.0-py3-none-any.whl`.
 
-Read more about the [advantages of wheels](https://pythonwheels.com/) to understand why generating
-wheel distributions are important.
+> [!TIP]
+> Read more about the [advantages of wheels](https://pythonwheels.com/) to understand why
+> generating wheel distributions are important.
 
 ## Publish Distributions to PyPI
 
@@ -98,7 +98,8 @@ directly from the filesystem using `pip`.
 $ poetry publish
 ```
 
-> Note: To enable publishing, remove the `"Private :: Do Not Upload"`
+> [!NOTE]
+> To enable publishing, remove the `"Private :: Do Not Upload"`
 > [trove classifier](https://pypi.org/classifiers/).
 
 # Enforcing Code Quality
@@ -109,8 +110,9 @@ Automated code quality checks are performed using
 environments and run commands based on [`noxfile.py`](./noxfile.py) for unit testing, PEP 8 style
 guide checking, type checking and documentation generation.
 
-> Note: `nox` is installed into the virtual environment automatically by the `poetry install`
-> command above. Run `poetry shell` to activate the virtual environment.
+> [!NOTE]
+> `nox` is installed into the virtual environment automatically by the `poetry install` command
+> above. Run `poetry shell` to activate the virtual environment.
 
 To run all default sessions:
 
@@ -152,12 +154,14 @@ To pass arguments to `pytest` through `nox`:
 
 ## Code Style Checking
 
-[PEP 8](https://peps.python.org/pep-0008/) is the universally accepted style guide for
-Python code. PEP 8 code compliance is verified using [Ruff](https://github.com/astral-sh/ruff).
-Ruff is configured in the `[tool.ruff]` section of `pyproject.toml`.
+[PEP 8](https://peps.python.org/pep-0008/) is the universally accepted style guide for Python
+code. PEP 8 code compliance is verified using [Ruff][Ruff]. Ruff is configured in the
+`[tool.ruff]` section of [`pyproject.toml`](./pyproject.toml).
 
-Some code style settings are included in [`.editorconfig`](./.editorconfig) and will be
-configured automatically in editors such as PyCharm.
+[Ruff]: https://github.com/astral-sh/ruff
+
+Some code style settings are included in [`.editorconfig`](./.editorconfig) and will be configured
+automatically in editors such as PyCharm.
 
 To lint code, run:
 
@@ -173,23 +177,12 @@ To automatically fix fixable lint errors, run:
 
 ## Automated Code Formatting
 
-Code is automatically formatted using [black](https://github.com/psf/black). Imports are
-automatically sorted and grouped using [Ruff](https://github.com/astral-sh/ruff).
-
-These tools are configured by:
-
-- [`pyproject.toml`](./pyproject.toml)
+[Ruff][Ruff] is used to automatically format code and group and sort imports.
 
 To automatically format code, run:
 
 ```bash
 (fact) $ nox -s fmt
-```
-
-To verify code has been formatted, such as in a CI job:
-
-```bash
-(fact) $ nox -s fmt_check
 ```
 
 ## Type Checking
@@ -382,7 +375,7 @@ To automatically list the licenses for all dependencies in (and their transitive
 using [pip-licenses](https://github.com/raimon49/pip-licenses):
 
 ```bash
-(fact) $ nox -N -s licenses
+(fact) $ nox -s licenses
 ...
  Name      Version  License     
  click     8.1.3    BSD License 
@@ -415,7 +408,8 @@ To run the image in a container:
 $ docker run --rm --interactive --tty fact 5
 ```
 
-> Note: If you need to install Poetry on Alpine Linux, see the pre-built 
+> [!NOTE]
+> If you need to install Poetry on Alpine Linux, see the pre-built 
 > [`poetry` package](https://pkgs.alpinelinux.org/packages?name=poetry&branch=edge) for that
 > platform rather than running `pip install poetry`. This avoids needing to build Poetry
 > dependencies from source.
@@ -445,7 +439,7 @@ consider the [deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/
 ```shell
 sudo add-apt-repository ppa:deadsnakes
 sudo apt update
-sudo apt install python3.10
+sudo apt install python3.12
 ```
 
 ## Package Dependency Tree
@@ -475,6 +469,7 @@ typer 0.7.0 Typer, build great CLIs. Easy to code. Based on Python type hints.
 
 # PyCharm Configuration
 
+> [!TIP]
 > Looking for a vivid dark color scheme for PyCharm?
 > Try [One Dark theme](https://plugins.jetbrains.com/plugin/11938-one-dark-theme).
 
@@ -506,15 +501,21 @@ project:
   - Editor | Code Style | Python | Wrapping and Braces | "From" Import Statements
     - ☑ Force parentheses if multiline
 
-## Integrate Code Formatters
+## Ruff Integration
 
-> Also consider installing the
-> [Ruff PyCharm Plugin](https://plugins.jetbrains.com/plugin/20574-ruff).
+Integrate [Ruff](https://docs.astral.sh/ruff/integrations/#pycharm-external-tool) linting and 
+formatting into PyCharm.
 
-To integrate
-[Black](https://black.readthedocs.io/en/stable/integrations/editors.html#pycharm-intellij-idea) and
-[Ruff](https://beta.ruff.rs/docs/editor-integrations/#pycharm-external-tool) automatic code
-formatters into PyCharm:
+### Linting and Formatting
+
+1. Install the [Ruff PyCharm Plugin](https://plugins.jetbrains.com/plugin/20574-ruff)
+2. Open Preferences or Settings | Tools | Ruff
+    - **Check**: Run Ruff when the python file is saved
+    - **Check**: Use ruff format
+
+Now, on <kbd>ctrl+s</kbd>, the current source file will be automatically formatted on save.
+
+### Import Sorting
 
 1. Ensure that the [File Watchers Plugin](https://plugins.jetbrains.com/plugin/7177-file-watchers)
    is installed.
@@ -523,11 +524,11 @@ formatters into PyCharm:
  ![](docs/static/images/preferences.png)
 
 3. Fill in the following fields
-    - **Name**: `black`
+    - **Name**: `ruff check --select I --fix`
     - **File Type**: Python
     - **Scope**: Project Files
     - **Program**: `$PyInterpreterDirectory$/python`
-    - **Arguments**: `-m black $FilePath$`
+    - **Arguments**: `-m ruff check --select I --fix $FilePath$`
     - **Output paths to refresh**: `$FilePath$`
     - **Working directory**: `$ProjectFileDir$`
     - **Advanced Options**
@@ -536,15 +537,7 @@ formatters into PyCharm:
 
   ![](docs/static/images/file_watcher.png)
 
-4. Copy the watcher, and replace references to `black` in the **Name** and **Arguments** fields to
-   `ruff check --select I --fix`.
-
-![](docs/static/images/file_watcher_copy.png)
-
-Now, on `Ctrl+S`, the current source file will be automatically formatted on save.
-
-> **Tip**
->
+> [!TIP]
 > These tools work best if you properly mark directories as excluded from the project that should 
 > be, such as `.nox`. See 
 > <https://www.jetbrains.com/help/pycharm/project-tool-window.html#content_pane_context_menu> on 
@@ -559,6 +552,7 @@ recommended way to launch Nox from PyCharm is to create a **Python**
 - Beside **Script Path**, press `▼` and select **Module name**: `nox`
 - **Parameters**, enter a Nox session: `-s test`
 - **Working Directory**: Enter the path to the current project
-- Check **Emulate terminal in output console** to enable colors to be rendered properly
+- Select **Modify Options** | Check **Emulate terminal in output console** to enable colors to be
+  rendered properly
 
 ![](docs/static/images/nox_run_configuration.png)
