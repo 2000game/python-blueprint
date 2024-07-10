@@ -1,5 +1,10 @@
 # Set strict to true to turn warnings into errors to catch warnings within CI.
 strict: true
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
 theme:
   name: material
   # By default, fonts are pulled from Google on the Internet. To support offline usage, this is
@@ -18,9 +23,10 @@ theme:
     - content.code.annotate
     - content.code.copy
     - content.tabs.link
+    - content.tooltips
     - navigation.expand
-    - navigation.instant
     - navigation.footer
+    - navigation.instant
     - navigation.top
     - navigation.tracking
     - search.highlight
@@ -28,6 +34,7 @@ theme:
     - search.suggest
     - toc.follow
 markdown_extensions:
+  - abbr
   - admonition
   - footnotes
   - pymdownx.details
@@ -37,6 +44,9 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.tabbed:
       alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
   - md_in_html
 extra_css:
   - static/stylesheets/extra.css
